@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LabyMod 3 Archive • PoliceModzXD</title>
+<style>
+:root{
+  --dirt:#2b2014; --dirt-dark:#1b140b; --stone:#373737; --stone-dark:#212121;
+  --mc-green:#5b8731; --mc-green-hover:#73a840; --mc-green-shadow:#3a571f;
+  --mc-btn:#727272; --mc-btn-hover:#8b8b8b; --mc-btn-dark:#3b3b3b;
+  --gold:#fcea54; --text:#ffffff; --muted:#b5b5b5; --border-dark:#111111;
+}
+*{box-sizing:border-box}
+html,body{
+  margin:0; min-height:100%;
+  font-family:"Minecraft", "Courier New", Courier, monospace, sans-serif;
+  color:var(--text);
+  background-color: #1a1a1a;
+  background-image: 
+    linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+    repeating-linear-gradient(45deg, #2b2b2b 0, #2b2b2b 2px, #1a1a1a 2px, #1a1a1a 4px);
+}
+header{
+  position:sticky; top:0; z-index:10;
+  background: var(--stone-dark);
+  border-bottom: 5px solid var(--border-dark);
+  box-shadow: 0 5px 0 rgba(0,0,0,0.5);
+}
+.top{max-width:1300px; margin:auto; padding:20px 25px; display:flex; gap:20px; align-items:center}
+.logo{
+  width:64px; height:64px; display:grid; place-items:center; font-size:32px;
+  background: var(--stone);
+  border: 4px solid var(--border-dark);
+  box-shadow: inset 2px 2px 0px #555, inset -2px -2px 0px #111;
+  image-rendering: pixelated;
+}
+h1{margin:0; font-size:clamp(24px, 4vw, 38px); text-shadow: 4px 4px 0px #000; letter-spacing: 1px;}
+.subtitle{margin:6px 0 0; color:var(--muted); font-size: 15px; text-shadow: 2px 2px 0px #000;}
+
+main{max-width:1300px; margin:auto; padding:30px 25px 60px}
+
+.controls{display:grid; grid-template-columns:1fr 180px 180px 180px; gap:15px; margin:22px 0}
+input, select{
+  width:100%; background:#0a0a0a; color:var(--text);
+  border: 4px solid #333;
+  border-top-color: #1a1a1a; border-left-color: #1a1a1a;
+  padding: 14px 16px; font-size: 16px; outline: none;
+  font-family: inherit;
+}
+input:focus, select:focus{border-color: var(--gold); background:#141414;}
+
+.stats{display:flex; gap:12px; flex-wrap:wrap; margin:16px 0; font-size: 15px;}
+.stat{
+  background: var(--stone-dark);
+  border: 3px solid var(--border-dark);
+  box-shadow: inset 1px 1px 0px #444;
+  padding: 10px 15px;
+}
+.stat b{color: var(--gold);}
+
+#status{color:var(--muted); margin:12px 0 22px; font-size: 16px;}
+
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:18px}
+
+.card{
+  background: var(--stone-dark);
+  border: 4px solid var(--border-dark);
+  box-shadow: inset 2px 2px 0px #444, inset -2px -2px 0px #111, 0 5px 0 rgba(0,0,0,0.3);
+  padding: 18px; display: flex; flex-direction: column; min-height: 180px;
+}
+.card:hover{border-color: var(--gold);}
+
+.card-top{display:flex; gap:14px; align-items:flex-start}
+.icon{
+  flex:0 0 54px; height:54px; display:grid; place-items:center;
+  background: #111; border: 3px solid #333; font-size: 28px;
+}
+.name{font-weight:bold; line-height:1.3; word-break:break-word; font-size: 18px; text-shadow: 2px 2px 0px #000; margin-top: 2px;}
+
+.badge{
+  display:inline-block; margin-top:10px; padding:4px 10px;
+  background: #1a1a1a; border: 2px solid #333; color: var(--gold); font-size: 13px;
+  text-shadow: 1px 1px 0px #000;
+}
+
+.actions{display:flex; gap:10px; margin-top:auto; padding-top:18px}
+
+.btn{
+  flex:1; text-align:center; text-decoration:none; padding:10px 8px;
+  font-weight: bold; font-size: 13px;
+  background: var(--mc-green);
+  color: #fff;
+  border: 3px solid #1c2b0e;
+  border-top-color: var(--mc-green-hover);
+  border-left-color: var(--mc-green-hover);
+  box-shadow: 0 3px 0 var(--mc-green-shadow);
+  text-shadow: 1px 1px 0px #000;
+  cursor: pointer;
+}
+.btn:hover{
+  background: var(--mc-green-hover);
+  border-top-color: #8bca4d;
+  border-left-color: #8bca4d;
+}
+.btn:active{transform: translateY(2px); box-shadow: 0 1px 0 var(--mc-green-shadow);}
+
+.btn.alt{
+  background: var(--mc-btn);
+  border-top-color: var(--mc-btn-hover);
+  border-left-color: var(--mc-btn-hover);
+  border-color: var(--mc-btn-dark);
+  box-shadow: 0 3px 0 #222;
+}
+.btn.alt:hover{
+  background: var(--mc-btn-hover);
+  border-top-color: #a3a3a3;
+  border-left-color: #a3a3a3;
+}
+.btn.alt:active{box-shadow: 0 1px 0 #222;}
+
+.empty{
+  grid-column:1/-1; text-align:center; padding:55px; font-size: 16px;
+  color:var(--muted); border: 3px dashed #444; background: var(--stone-dark);
+}
+
+footer{text-align:center; color:var(--muted); font-size:14px; padding:30px; text-shadow: 1px 1px 0px #000;}
+a{color:inherit}
+
+@media(max-width:1000px){.controls{grid-template-columns:1fr}.top{align-items:flex-start}}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <div class="logo">⛏</div>
+    <div>
+      <h1>LabyMod 3 Archive</h1>
+      <div class="subtitle">Addons, JARs, Vanilla-Instanzen & Forge-Versionen</div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="controls">
+    <input id="search" type="search" placeholder="🔎 Datei suchen...">
+    
+    <select id="category">
+      <option value="all">Alle Kategorien</option>
+      <option value="addons">Addons</option>
+      <option value="forge">Forge</option>
+      <option value="vanilla">Vanilla</option>
+    </select>
+
+    <select id="version">
+      <option value="all">Alle Versionen</option>
+      <option value="1.8.9">Minecraft 1.8.9</option>
+      <option value="1.12.2">Minecraft 1.12.2</option>
+      <option value="1.16">Minecraft 1.16 / 1.16.5</option>
+      <option value="other">Sonstige</option>
+    </select>
+    
+    <select id="type">
+      <option value="all">Alle Dateitypen</option>
+      <option value="jar">JAR</option>
+      <option value="zip">ZIP</option>
+      <option value="other">Andere</option>
+    </select>
+  </div>
+
+  <div class="stats">
+    <div class="stat">Dateien: <b id="count">0</b></div>
+    <div class="stat">Gefunden: <b id="shown">0</b></div>
+    <div class="stat">Quelle: <b>GitHub</b></div>
+  </div>
+
+  <div id="status">⏳ Lade Repository...</div>
+  <section id="grid" class="grid"></section>
+</main>
+
+<footer>
+  LabyMod 3 Archive • PoliceModzXD • Die Download-Links zeigen direkt auf die Dateien im Repository.
+</footer>
+
+<script>
+const OWNER = "PoliceModzXD";
+const REPO = "LabyMod3";
+const BRANCH = "main";
+const API = `https://api.github.com/repos/${OWNER}/${REPO}/git/trees/${BRANCH}?recursive=1`;
+const RAW = `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/`;
+
+let files = [];
+
+function esc(s){
+  return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+}
+
+function info(path){
+  const low = path.toLowerCase();
+  
+  let category = "Addon";
+  if (low.includes("labymod-forgemod")) {
+    category = "Forge";
+  } else if (low.includes("labymod-vanilla-instanz")) {
+    category = "Vanilla";
+  }
+
+  // Für die Filterabfrage (kleingeschrieben intern)
+  let catKey = category.toLowerCase();
+
+  let version = "other";
+  if (low.includes("1.8.9")) version="1.8.9";
+  else if (low.includes("1.12.2")) version="1.12.2";
+  else if (low.includes("1.16.5") || low.includes("1.16")) version="1.16";
+
+  const ext = (path.split(".").pop() || "").toLowerCase();
+  return {category, catKey, version, ext};
+}
+
+function icon(ext){
+  if(ext==="jar") return "☕";
+  if(ext==="zip") return "📦";
+  if(ext==="json") return "📄";
+  if(ext==="md") return "📜";
+  return "📁";
+}
+
+function formatDisplayName(path) {
+  let name = path.split("/").pop();
+  const mcMatch = name.match(/mc(1\.\d+(\.\d+)?)/i);
+  const ext = name.split(".").pop();
+  
+  if (name.toLowerCase().includes("labymod") && mcMatch) {
+    return `LabyMod-${mcMatch[1]}.${ext}`;
+  }
+  
+  return name;
+}
+
+function render(){
+  const q = document.getElementById("search").value.toLowerCase().trim();
+  const cat = document.getElementById("category").value;
+  const v = document.getElementById("version").value;
+  const t = document.getElementById("type").value;
+
+  const filtered = files.filter(f=>{
+    const i = info(f.path);
+    const text = f.path.toLowerCase();
+    
+    const matchQ = !q || text.includes(q);
+    const matchCat = cat === "all" || i.catKey === cat;
+    const matchV = v === "all" || (v === "other" ? i.version === "other" : i.version === v);
+    const matchT = t === "all" || (t === "other" ? !["jar","zip"].includes(i.ext) : i.ext === t);
+    
+    return matchQ && matchCat && matchV && matchT;
+  });
+  
+  document.getElementById("shown").textContent = filtered.length;
+  const grid = document.getElementById("grid");
+  
+  if(!filtered.length){
+    grid.innerHTML = '<div class="empty">🔍 Keine passenden Dateien gefunden.</div>';
+    return;
+  }
+  
+  grid.innerHTML = filtered.map(f=>{
+    const i = info(f.path);
+    const displayName = formatDisplayName(f.path);
+    const raw = RAW + f.path.split("/").map(encodeURIComponent).join("/");
+    const github = `https://github.com/${OWNER}/${REPO}/blob/${BRANCH}/${f.path.split("/").map(encodeURIComponent).join("/")}`;
+    const versionName = i.version === "other" ? "Sonstige" : i.version;
+    const fileExt = i.ext.toUpperCase() || "DATEI";
+
+    return `<article class="card">
+      <div class="card-top">
+        <div class="icon">${icon(i.ext)}</div>
+        <div>
+          <div class="name">${esc(displayName)}</div>
+          <span class="badge">${esc(i.category)} · ${esc(versionName)} · ${esc(fileExt)}</span>
+        </div>
+      </div>
+      <div class="actions">
+        <a class="btn" href="${raw}" download>⬇ Download</a>
+        <a class="btn alt" href="${github}" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </article>`;
+  }).join("");
+}
+
+async function load(){
+  try{
+    const r = await fetch(API, {headers:{Accept:"application/vnd.github+json"}});
+    if(!r.ok) throw new Error(`GitHub API: ${r.status}`);
+    const data = await r.json();
+    files = (data.tree || []).filter(x => x.type === "blob");
+    files.sort((a,b) => a.path.localeCompare(b.path, "de", {numeric:true}));
+    document.getElementById("count").textContent = files.length;
+    document.getElementById("status").textContent = `✅ ${files.length} Dateien geladen.`;
+    render();
+  }catch(e){
+    document.getElementById("status").innerHTML = `❌ Repository konnte nicht geladen werden. <a href="https://github.com/${OWNER}/${REPO}" target="_blank">Repository öffnen</a>`;
+    document.getElementById("grid").innerHTML = '<div class="empty">GitHub API ist momentan nicht erreichbar oder das API-Limit wurde erreicht. Bitte Seite später neu laden.</div>';
+    console.error(e);
+  }
+}
+
+document.getElementById("search").addEventListener("input", render);
+document.getElementById("category").addEventListener("change", render);
+document.getElementById("version").addEventListener("change", render);
+document.getElementById("type").addEventListener("change", render);
+
+load();
+</script>
+</body>
+</html>
