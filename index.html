@@ -199,14 +199,18 @@ function info(path){
   const low = path.toLowerCase();
   
   let category = "Addon";
+  let catKey = "addons";
+
   if (low.includes("labymod-forgemod")) {
     category = "Forge";
+    catKey = "forge";
   } else if (low.includes("labymod-vanilla-instanz")) {
     category = "Vanilla";
+    catKey = "vanilla";
+  } else if (low.includes("labymod3-addons") || low.includes("addon")) {
+    category = "Addon";
+    catKey = "addons";
   }
-
-  // Für die Filterabfrage (kleingeschrieben intern)
-  let catKey = category.toLowerCase();
 
   let version = "other";
   if (low.includes("1.8.9")) version="1.8.9";
